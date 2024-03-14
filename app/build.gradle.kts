@@ -35,6 +35,51 @@ android {
     }
 }
 
+// Jitpack does not play nicely with libraries that depend on each other in the same project. This is a workaround.
+configurations.all {
+    resolutionStrategy.dependencySubstitution {
+        substitute(
+            module("com.github.Troy1010:tmcommonkotlin-androidx:1.8.3")
+        ).using(module("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-androidx:1.8.3"))
+
+        substitute(
+            module("com.github.Troy1010:tmcommonkotlin-core:1.8.3")
+        ).using(module("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-core:1.8.3"))
+
+        substitute(
+            module("com.github.Troy1010:tmcommonkotlin-coroutines:1.8.3")
+        ).using(module("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-coroutines:1.8.3"))
+
+        substitute(
+            module("com.github.Troy1010:tmcommonkotlin-customviews:1.8.3")
+        ).using(module("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-customviews:1.8.3"))
+
+        substitute(
+            module("com.github.Troy1010:tmcommonkotlin-dsl:1.8.3")
+        ).using(module("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-dsl:1.8.3"))
+
+        substitute(
+            module("com.github.Troy1010:tmcommonkotlin-microphone:1.8.3")
+        ).using(module("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-microphone:1.8.3"))
+
+        substitute(
+            module("com.github.Troy1010:tmcommonkotlin-misc:1.8.3")
+        ).using(module("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-misc:1.8.3"))
+
+        substitute(
+            module("com.github.Troy1010:tmcommonkotlin-rx3:1.8.3")
+        ).using(module("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-rx3:1.8.3"))
+
+        substitute(
+            module("com.github.Troy1010:tmcommonkotlin-tuple:1.8.3")
+        ).using(module("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-tuple:1.8.3"))
+
+        substitute(
+            module("com.github.Troy1010:tmcommonkotlin-view:1.8.3")
+        ).using(module("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-view:1.8.3"))
+    }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -48,4 +93,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // # TMCommonKotlin
+    implementation("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-androidx:1.8.3")
+    implementation("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-core:1.8.3")
+    implementation("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-coroutines:1.8.3")
+    implementation("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-customviews:1.8.3")
+    implementation("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-misc:1.8.3")
+    implementation("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-tuple:1.8.3")
+    implementation("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-view:1.8.3")
 }
