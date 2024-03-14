@@ -10,6 +10,9 @@ import android.widget.TextView.OnEditorActionListener
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.tminus1010.tmcommonkotlin.coroutines.extensions.observe
+import com.tminus1010.tmcommonkotlin.view.extensions.easyToast
+import com.tminus1010.tminustasker.R
 import com.tminus1010.tminustasker.databinding.FragmentAddCategoryBinding
 import kotlinx.coroutines.runBlocking
 
@@ -31,6 +34,9 @@ class AddCategoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // # Events
+        viewModel.toastSuccessfullySubmitted.observe(this) { easyToast(getString(R.string.submitted_successfully)) }
+        // # User Intents
         binding.edittextInputCategory.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 runBlocking { viewModel.userInputCategoryName.emit(binding.edittextInputCategory.text.toString()) }
@@ -39,6 +45,7 @@ class AddCategoryFragment : Fragment() {
             }
             false
         })
+        binding.buttonSubmit.setOnClickListener { runBlocking { viewModel.userSubmit() } }
     }
 
     override fun onDestroyView() {

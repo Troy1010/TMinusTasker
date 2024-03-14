@@ -17,15 +17,9 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.tminus1010.tminustasker.databinding.FragmentDashboardBinding
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 class DashboardFragment : Fragment() {
-
-    private var _binding: FragmentDashboardBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
     val viewModel by lazy { ViewModelProvider(this).get(DashboardViewModel::class.java) }
 
     override fun onCreateView(
@@ -33,17 +27,12 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         return ComposeView(requireContext()).apply {
             setContent {
-                StringList(listOf("A", "B", "C"))
+                val categories = viewModel.categories.collectAsStateWithLifecycle()
+                StringList(categories.value)
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
 
