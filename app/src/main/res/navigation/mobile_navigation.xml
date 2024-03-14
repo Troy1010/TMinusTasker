@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_add_category"
-        android:name="com.tminus1010.tminustasker.ui.home.AddCategoryFragment"
+        android:name="com.tminus1010.tminustasker.ui.add_category.AddCategoryFragment"
         android:label="@string/add_category"
         tools:layout="@layout/fragment_add_category" />
 

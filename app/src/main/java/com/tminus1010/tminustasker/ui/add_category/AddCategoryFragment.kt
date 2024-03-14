@@ -1,4 +1,4 @@
-package com.tminus1010.tminustasker.ui.home
+package com.tminus1010.tminustasker.ui.add_category
 
 import android.os.Bundle
 import android.view.LayoutInflater
