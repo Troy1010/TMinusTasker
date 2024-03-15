@@ -14,9 +14,11 @@ import com.tminus1010.tmcommonkotlin.coroutines.extensions.observe
 import com.tminus1010.tmcommonkotlin.view.extensions.easyToast
 import com.tminus1010.tminustasker.R
 import com.tminus1010.tminustasker.databinding.FragmentAddCategoryBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 
 
+@AndroidEntryPoint
 class AddCategoryFragment : Fragment() {
 
     private var _binding: FragmentAddCategoryBinding? = null

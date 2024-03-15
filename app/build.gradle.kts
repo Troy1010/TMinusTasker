@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -99,6 +102,10 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-rc01")
 
+    // # Hilt
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+
     // # TMCommonKotlin
     implementation("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-androidx:1.8.3")
     implementation("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-core:1.8.3")
@@ -107,4 +114,9 @@ dependencies {
     implementation("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-misc:1.8.3")
     implementation("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-tuple:1.8.3")
     implementation("com.github.Troy1010.TMCommonKotlin:tmcommonkotlin-view:1.8.3")
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
