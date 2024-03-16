@@ -34,7 +34,8 @@ class DashboardViewModel @Inject constructor(
                 categories.map {
                     CategoryViewModelItem(
                         categoryName = it.categoryName,
-                        color = if (it.isCompletedToday) Color.GREEN else Color.RED,
+                        backgroundColor = if (it.isCompletedToday) Color.GREEN else 0xFFA52A2A.toInt(),
+                        textColor = if (it.isCompletedToday) Color.BLACK else 0xFFF5F5F5.toInt(),
                         onClick = {
                             userSelectCategory(it)
                         }

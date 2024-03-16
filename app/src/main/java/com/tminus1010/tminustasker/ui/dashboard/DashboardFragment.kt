@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -53,12 +54,14 @@ fun ComposableList(items: List<CategoryViewModelItem>) {
                     .padding(vertical = 8.dp)
                     .clickable { item.onClick() },
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(item.color)
+                    containerColor = Color(item.backgroundColor)
                 ),
             ) {
                 Text(
                     text = item.categoryName,
-                    modifier = Modifier.padding(16.dp)
+                    color = Color(item.textColor),
+                    modifier = Modifier.padding(16.dp),
+                    fontSize = 16.sp,
                 )
             }
         }
