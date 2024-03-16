@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -32,30 +33,31 @@ class DashboardFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 val categories = viewModel.categories.collectAsStateWithLifecycle()
-                StringList(categories.value)
+                ComposableList(categories.value)
             }
         }
     }
 }
 
 @Composable
-fun StringList(strings: List<String>) {
+fun ComposableList(items: List<CategoryViewModelItem>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
     ) {
-        strings.forEach { s ->
+        items.forEach { item ->
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                    .padding(vertical = 8.dp)
+                    .clickable { item.onClick() },
                 colors = CardDefaults.cardColors(
-                    containerColor = Color.Green
+                    containerColor = Color(item.color)
                 ),
             ) {
                 Text(
-                    text = s,
+                    text = item.categoryName,
                     modifier = Modifier.padding(16.dp)
                 )
             }

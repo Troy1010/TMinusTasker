@@ -6,4 +6,5 @@
     <string name="add_category">Add Category</string>
     <string name="submit">Submit</string>
     <string name="submitted_successfully">Submitted successfully</string>
+    <string name="registered_task_completion_for">Registered Task Completion For:%1$s</string>
 </resources>
