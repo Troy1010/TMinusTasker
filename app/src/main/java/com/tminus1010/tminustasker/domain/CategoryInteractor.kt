@@ -1,16 +1,18 @@
 package com.tminus1010.tminustasker.domain
 
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.tminus1010.tminustasker.data.CategoryRepo
+import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Singleton
-class CategoryInteractor @Inject constructor() {
-
-    val categories = MutableStateFlow(listOf<String>())
+class CategoryInteractor @Inject constructor(
+    private val categoryRepo: CategoryRepo,
+) {
+    val categories: SharedFlow<List<String>> = categoryRepo.flow
 
     suspend fun addCategory(categoryName: String) {
-        categories.emit(categories.value.plus(categoryName))
+        categoryRepo.add(categoryName)
     }
 }

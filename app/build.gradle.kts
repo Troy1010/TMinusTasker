@@ -102,6 +102,12 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-rc01")
 
+    // # Moshi
+    implementation("com.squareup.moshi:moshi-kotlin:1.13.0")
+
+    // # DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
     // # Inject
     implementation("javax.inject:javax.inject:1") // This is not necessary, but makes it easier to quick-fix the import for @Inject.
 
