@@ -34,12 +34,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_setup, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
+        setupActionBarWithNavController(
+            navController,
+            AppBarConfiguration(setOf(R.id.navigation_setup, R.id.navigation_dashboard)),
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         // ## Mediation
         ActivityWrapper.activity = this
