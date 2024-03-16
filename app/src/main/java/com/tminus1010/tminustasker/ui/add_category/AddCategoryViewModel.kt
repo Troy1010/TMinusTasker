@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.tminus1010.tmcommonkotlin.androidx.ShowToast
 import com.tminus1010.tmcommonkotlin.view.NativeText
 import com.tminus1010.tminustasker.R
+import com.tminus1010.tminustasker.data.CategoryRepo
 import com.tminus1010.tminustasker.data.TaskCompletionRepo
 import com.tminus1010.tminustasker.domain.MainInteractor
 import com.tminus1010.tminustasker.environment.android_wrapper.ActivityWrapper
@@ -17,6 +18,7 @@ class AddCategoryViewModel @Inject constructor(
     private val activityWrapper: ActivityWrapper,
     private val showToast: ShowToast,
     private val taskCompletionRepo: TaskCompletionRepo,
+    private val categoryRepo: CategoryRepo,
 ) : ViewModel() {
     // # User Intents
     suspend fun userSubmit() {
@@ -27,6 +29,16 @@ class AddCategoryViewModel @Inject constructor(
     suspend fun userPlayground() {
         activityWrapper.showAlertDialog.invoke("Resetting task completions")
         taskCompletionRepo.setDefault()
+    }
+
+    suspend fun userClearTaskCompletions() {
+        activityWrapper.showAlertDialog.invoke("Clearing task completions")
+        taskCompletionRepo.setDefault()
+    }
+
+    suspend fun userClearCategories() {
+        activityWrapper.showAlertDialog.invoke("Clearing categories")
+        categoryRepo.setDefault()
     }
 
     // # State

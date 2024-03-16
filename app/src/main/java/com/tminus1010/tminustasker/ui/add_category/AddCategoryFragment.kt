@@ -46,6 +46,8 @@ class AddCategoryFragment : Fragment() {
         })
         binding.buttonSubmit.setOnClickListener { runBlocking { viewModel.userSubmit() } }
         binding.buttonPlayground.setOnClickListener { lifecycleScope.launch { viewModel.userPlayground() } }
+        binding.buttonClearCategories.setOnClickListener { lifecycleScope.launch { viewModel.userClearCategories() } }
+        binding.buttonClearTaskCompletions.setOnClickListener { lifecycleScope.launch { viewModel.userClearTaskCompletions() } }
     }
 
     override fun onDestroyView() {
