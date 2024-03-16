@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.tminus1010.tminustasker.databinding.ActivityMainBinding
+import com.tminus1010.tminustasker.environment.android_wrapper.ActivityWrapper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,6 +18,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // ## Mediation
+        ActivityWrapper.activity = this
+        //
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

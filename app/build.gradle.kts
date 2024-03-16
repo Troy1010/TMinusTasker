@@ -102,6 +102,9 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-rc01")
 
+    // # Inject
+    implementation("javax.inject:javax.inject:1") // This is not necessary, but makes it easier to quick-fix the import for @Inject.
+
     // # Hilt
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")

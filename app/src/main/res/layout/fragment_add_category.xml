@@ -27,8 +27,15 @@
         android:imeOptions="actionDone"
         android:inputType="text"
         android:singleLine="true"
-        app:layout_constraintBottom_toTopOf="@id/button_submit"
+        app:layout_constraintBottom_toTopOf="@id/button_playground"
         app:layout_constraintTop_toBottomOf="@id/text_input_header" />
+
+    <Button
+        android:id="@+id/button_playground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Playground"
+        app:layout_constraintBottom_toTopOf="@id/button_submit" />
 
     <Button
         android:id="@+id/button_submit"

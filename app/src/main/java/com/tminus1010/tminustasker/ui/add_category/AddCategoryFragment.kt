@@ -10,11 +10,13 @@ import android.widget.TextView.OnEditorActionListener
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.tminus1010.tmcommonkotlin.coroutines.extensions.observe
 import com.tminus1010.tmcommonkotlin.view.extensions.easyToast
 import com.tminus1010.tminustasker.R
 import com.tminus1010.tminustasker.databinding.FragmentAddCategoryBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
@@ -48,6 +50,7 @@ class AddCategoryFragment : Fragment() {
             false
         })
         binding.buttonSubmit.setOnClickListener { runBlocking { viewModel.userSubmit() } }
+        binding.buttonPlayground.setOnClickListener { lifecycleScope.launch { viewModel.userPlayground() } }
     }
 
     override fun onDestroyView() {
