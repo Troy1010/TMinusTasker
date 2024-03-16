@@ -1,4 +1,4 @@
-package com.tminus1010.tminustasker.ui.add_category
+package com.tminus1010.tminustasker.ui.setup
 
 import androidx.lifecycle.ViewModel
 import com.tminus1010.tmcommonkotlin.androidx.ShowToast
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class AddCategoryViewModel @Inject constructor(
+class SetupViewModel @Inject constructor(
     private val mainInteractor: MainInteractor,
     private val activityWrapper: ActivityWrapper,
     private val showToast: ShowToast,
@@ -21,9 +21,9 @@ class AddCategoryViewModel @Inject constructor(
     private val categoryRepo: CategoryRepo,
 ) : ViewModel() {
     // # User Intents
-    suspend fun userSubmit() {
+    suspend fun userAddCategory() {
         mainInteractor.createCategory(userInputCategoryName.value)
-        showToast(NativeText.Resource(R.string.submitted_successfully))
+        showToast("Category Added: ${userInputCategoryName.value}")
     }
 
     suspend fun userPlayground() {

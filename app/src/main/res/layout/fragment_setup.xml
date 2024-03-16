@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.add_category.AddCategoryFragment">
+    tools:context=".ui.setup.SetupFragment">
 
     <TextView
         android:id="@+id/text_input_header"
@@ -13,7 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/add_category"
+        android:text="@string/setup"
         android:textAlignment="textStart"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/edittext_input_category"
@@ -49,10 +49,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Playground"
-        app:layout_constraintBottom_toTopOf="@id/button_submit" />
+        app:layout_constraintBottom_toTopOf="@id/button_add_category" />
 
     <Button
-        android:id="@+id/button_submit"
+        android:id="@+id/button_add_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/submit"

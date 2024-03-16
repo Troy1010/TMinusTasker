@@ -1,6 +1,7 @@
 package com.tminus1010.tminustasker.environment.android_wrapper
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.navigation.NavController
 import com.tminus1010.tmcommonkotlin.androidx.launchOnMainThread
 import com.tminus1010.tminustasker.R
@@ -15,7 +16,11 @@ class AndroidNavigationWrapperImpl @Inject constructor() : AndroidNavigationWrap
     }
 
     override fun navTo(id: Int) = launchOnMainThread {
-        nav.navigate(id)
+        try {
+            nav.navigate(id)
+        } catch (e: Exception) {
+            Log.i("AndroidNavigationWrapperImpl", "TM`Swallowing error during navigation. navigation id:${id}", e)
+        }
     }
 
     private val nav get() = Companion.nav ?: error("This class expects Companion.nav to be assigned")

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_dashboard">
+    app:startDestination="@+id/navigation_setup">
 
     <fragment
-        android:id="@+id/navigation_add_category"
-        android:name="com.tminus1010.tminustasker.ui.add_category.AddCategoryFragment"
-        android:label="@string/add_category"
-        tools:layout="@layout/fragment_add_category" />
+        android:id="@+id/navigation_setup"
+        android:name="com.tminus1010.tminustasker.ui.setup.SetupFragment"
+        android:label="@string/setup"
+        tools:layout="@layout/fragment_setup" />
 
     <fragment
         android:id="@+id/navigation_dashboard"

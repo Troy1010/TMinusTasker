@@ -1,4 +1,4 @@
-package com.tminus1010.tminustasker.ui.add_category
+package com.tminus1010.tminustasker.ui.setup
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,25 +11,25 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.tminus1010.tminustasker.databinding.FragmentAddCategoryBinding
+import com.tminus1010.tminustasker.databinding.FragmentSetupBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
 @AndroidEntryPoint
-class AddCategoryFragment : Fragment() {
+class SetupFragment : Fragment() {
 
-    private var _binding: FragmentAddCategoryBinding? = null
+    private var _binding: FragmentSetupBinding? = null
     private val binding get() = _binding!!
-    val viewModel by lazy { ViewModelProvider(this).get(AddCategoryViewModel::class.java) }
+    val viewModel by lazy { ViewModelProvider(this).get(SetupViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddCategoryBinding.inflate(inflater, container, false)
+        _binding = FragmentSetupBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -44,7 +44,7 @@ class AddCategoryFragment : Fragment() {
             }
             false
         })
-        binding.buttonSubmit.setOnClickListener { runBlocking { viewModel.userSubmit() } }
+        binding.buttonAddCategory.setOnClickListener { lifecycleScope.launch { viewModel.userAddCategory() } }
         binding.buttonPlayground.setOnClickListener { lifecycleScope.launch { viewModel.userPlayground() } }
         binding.buttonClearCategories.setOnClickListener { lifecycleScope.launch { viewModel.userClearCategories() } }
         binding.buttonClearTaskCompletions.setOnClickListener { lifecycleScope.launch { viewModel.userClearTaskCompletions() } }
