@@ -8,9 +8,11 @@ import com.tminus1010.tmcommonkotlin.view.NativeText
 import com.tminus1010.tminustasker.R
 import com.tminus1010.tminustasker.domain.CategoryInfo
 import com.tminus1010.tminustasker.domain.MainInteractor
+import com.tminus1010.tminustasker.environment.android_wrapper.ActivityWrapper
 import com.tminus1010.tminustasker.ui.all_features.ComposableNativeText
 import com.tminus1010.tminustasker.ui.all_features.vm_item.MenuVMItem
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -21,11 +23,26 @@ import javax.inject.Inject
 class DashboardViewModel @Inject constructor(
     private val mainInteractor: MainInteractor,
     private val showToast: ShowToast,
+    private val activityWrapper: ActivityWrapper,
 ) : ViewModel() {
     fun userSelectCategory(categoryInfo: CategoryInfo) {
         viewModelScope.launch {
-            showToast(NativeText.Arguments(R.string.registered_task_completion_for, categoryInfo.categoryName))
-            mainInteractor.registerTaskCompletionForCategory(categoryInfo.categoryName)
+            activityWrapper.showAlertDialog(
+                body = NativeText.Simple("(Optional) Task Completion Message"),
+                onSubmitText = { submittedText: CharSequence? ->
+                    GlobalScope.launch {
+                        mainInteractor.createTaskCompletion(categoryInfo.categoryName, submittedText?.toString())
+                        showToast(NativeText.Arguments(R.string.registered_task_completion_for, categoryInfo.categoryName))
+                    }
+                },
+                onSkip = {
+                    GlobalScope.launch {
+                        mainInteractor.createTaskCompletion(categoryInfo.categoryName, null)
+                        showToast(NativeText.Arguments(R.string.registered_task_completion_for, categoryInfo.categoryName))
+                    }
+                },
+                onCancel = { },
+            )
         }
     }
 
@@ -35,7 +52,6 @@ class DashboardViewModel @Inject constructor(
             mainInteractor.removeCategory(categoryInfo.categoryName)
         }
     }
-
 
     val state =
         mainInteractor.categories

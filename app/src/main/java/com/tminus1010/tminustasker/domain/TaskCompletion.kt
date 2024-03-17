@@ -4,5 +4,6 @@ import java.time.LocalDate
 
 data class TaskCompletion(
     val categoryName: String,
+    val message: String?,
     val localDate: LocalDate,
 )
