@@ -33,7 +33,9 @@ class MainActivity : AppCompatActivity() {
         // # Setup top ActionBar
         setSupportActionBar(findViewById(R.id.toolbar_1))
         supportActionBar?.apply {
-            title = "TMinusTasker"
+            setDisplayShowCustomEnabled(true)
+            customView = layoutInflater.inflate(R.layout.action_bar_custom, null)
+            setDisplayShowTitleEnabled(false)
         }
         // # Setup bottom NavBar
         val navView: BottomNavigationView = binding.navView
