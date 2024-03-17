@@ -4,8 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
@@ -27,6 +32,8 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.tminus1010.tmcommonkotlin.androidx.extensions.getColorByAttr
+import com.tminus1010.tminustasker.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +48,13 @@ class DashboardFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 val state = viewModel.state.collectAsStateWithLifecycle()
-                ComposableList(state.value)
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color(requireContext().theme.getColorByAttr(R.attr.colorBackgroundWorkaround))) // TODO: Use Material instead. Not using it for background atm because it is messing with bottom nav bar button click animation.
+                ) {
+                    ComposableList(state.value)
+                }
             }
         }
     }
@@ -52,7 +65,9 @@ fun ComposableList(items: List<CategoryViewModelItem>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .fillMaxHeight()
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.Center,
     ) {
         items.forEach { item ->
             var expanded by remember { mutableStateOf(false) }
