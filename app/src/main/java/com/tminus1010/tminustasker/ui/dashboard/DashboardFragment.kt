@@ -27,12 +27,11 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.tminus1010.tmcommonkotlin.androidx.ShowToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
-    val viewModel by lazy { ViewModelProvider(this).get(DashboardViewModel::class.java) }
+    private val viewModel by lazy { ViewModelProvider(this).get(DashboardViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,14 +41,14 @@ class DashboardFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 val state = viewModel.state.collectAsStateWithLifecycle()
-                ComposableList(state.value, ShowToast(this@DashboardFragment.requireActivity().application))
+                ComposableList(state.value)
             }
         }
     }
 }
 
 @Composable
-fun ComposableList(items: List<CategoryViewModelItem>, showToast: ShowToast) {
+fun ComposableList(items: List<CategoryViewModelItem>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -63,16 +62,8 @@ fun ComposableList(items: List<CategoryViewModelItem>, showToast: ShowToast) {
                     .padding(vertical = 8.dp)
                     .pointerInput(Unit) {
                         detectTapGestures(
-                            onLongPress = {
-                                logz("long click")
-                                showToast("long click")
-                                expanded = true
-                            },
-                            onTap = {
-                                logz("normal click")
-                                showToast("normal click")
-                                item.onClick()
-                            }
+                            onLongPress = { expanded = true },
+                            onTap = { item.onClick() },
                         )
                     },
                 colors = CardDefaults.cardColors(
@@ -87,12 +78,12 @@ fun ComposableList(items: List<CategoryViewModelItem>, showToast: ShowToast) {
                 )
                 DropdownMenu(
                     expanded = expanded,
-                    onDismissRequest = { expanded = false }
+                    onDismissRequest = { expanded = false },
                 ) {
                     item.menuVMItems.forEach { menuVMItem ->
                         DropdownMenuItem(
                             text = { Text(menuVMItem.text.stringResource()) },
-                            onClick = { menuVMItem.onClick() }
+                            onClick = { menuVMItem.onClick(); expanded = false },
                         )
                     }
                 }

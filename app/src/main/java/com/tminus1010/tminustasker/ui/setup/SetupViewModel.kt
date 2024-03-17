@@ -20,8 +20,9 @@ class SetupViewModel @Inject constructor(
 ) : ViewModel() {
     // # User Intents
     suspend fun userAddCategory() {
-        mainInteractor.createCategory(userInputCategoryName.value)
-        showToast("Category Added: ${userInputCategoryName.value}")
+        mainInteractor.createCategory(userInput.value)
+        showToast("Category Added: ${userInput.value}")
+        userInput.emit("")
     }
 
     suspend fun userPlayground() {
@@ -40,5 +41,5 @@ class SetupViewModel @Inject constructor(
     }
 
     // # State
-    val userInputCategoryName = MutableStateFlow("")
+    val userInput = MutableStateFlow("")
 }

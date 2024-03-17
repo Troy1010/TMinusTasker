@@ -22,7 +22,7 @@ class SetupFragment : Fragment() {
 
     private var _binding: FragmentSetupBinding? = null
     private val binding get() = _binding!!
-    val viewModel by lazy { ViewModelProvider(this).get(SetupViewModel::class.java) }
+    private val viewModel by lazy { ViewModelProvider(this).get(SetupViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +38,7 @@ class SetupFragment : Fragment() {
         // # User Intents
         binding.edittextInputCategory.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                runBlocking { viewModel.userInputCategoryName.emit(binding.edittextInputCategory.text.toString()) }
+                runBlocking { viewModel.userInput.emit(binding.edittextInputCategory.text.toString()) }
                 getSystemService(requireActivity(), InputMethodManager::class.java)?.hideSoftInputFromWindow(view.windowToken, 0)
                 return@OnEditorActionListener true
             }
