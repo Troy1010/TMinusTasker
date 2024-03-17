@@ -37,6 +37,10 @@ class MainInteractor @Inject constructor(
         categoryRepo.add(categoryName)
     }
 
+    suspend fun removeCategory(categoryName: String) {
+        categoryRepo.remove(categoryName)
+    }
+
     suspend fun registerTaskCompletionForCategory(categoryName: String) {
         taskCompletionRepo.add(TaskCompletion(categoryName, LocalDate.now()))
     }

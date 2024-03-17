@@ -2,8 +2,6 @@ package com.tminus1010.tminustasker.ui.setup
 
 import androidx.lifecycle.ViewModel
 import com.tminus1010.tmcommonkotlin.androidx.ShowToast
-import com.tminus1010.tmcommonkotlin.view.NativeText
-import com.tminus1010.tminustasker.R
 import com.tminus1010.tminustasker.data.CategoryRepo
 import com.tminus1010.tminustasker.data.TaskCompletionRepo
 import com.tminus1010.tminustasker.domain.MainInteractor

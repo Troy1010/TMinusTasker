@@ -8,6 +8,8 @@ import com.tminus1010.tmcommonkotlin.view.NativeText
 import com.tminus1010.tminustasker.R
 import com.tminus1010.tminustasker.domain.CategoryInfo
 import com.tminus1010.tminustasker.domain.MainInteractor
+import com.tminus1010.tminustasker.ui.all_features.ComposableNativeText
+import com.tminus1010.tminustasker.ui.all_features.vm_item.MenuVMItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -27,8 +29,15 @@ class DashboardViewModel @Inject constructor(
         }
     }
 
+    fun userRemoveCategory(categoryInfo: CategoryInfo) {
+        viewModelScope.launch {
+            showToast(NativeText.Arguments(R.string.removed_category, categoryInfo.categoryName))
+            mainInteractor.removeCategory(categoryInfo.categoryName)
+        }
+    }
 
-    val categories =
+
+    val state =
         mainInteractor.categories
             .map { categories ->
                 categories.map {
@@ -36,9 +45,13 @@ class DashboardViewModel @Inject constructor(
                         categoryName = it.categoryName,
                         backgroundColor = if (it.isCompletedToday) Color.GREEN else 0xFFA52A2A.toInt(),
                         textColor = if (it.isCompletedToday) Color.BLACK else 0xFFF5F5F5.toInt(),
-                        onClick = {
-                            userSelectCategory(it)
-                        }
+                        menuVMItems = listOf(
+                            MenuVMItem(
+                                text = ComposableNativeText.Simple("Remove Category"),
+                                onClick = { userRemoveCategory(it) }
+                            )
+                        ),
+                        onClick = { userSelectCategory(it) }
                     )
                 }
             }

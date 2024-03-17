@@ -1,4 +1,4 @@
-package com.tminus1010.tminustasker.ui
+package com.tminus1010.tminustasker.ui.all_features
 
 import com.tminus1010.tminustasker.environment.android_wrapper.AndroidNavigationWrapper
 import dagger.Reusable

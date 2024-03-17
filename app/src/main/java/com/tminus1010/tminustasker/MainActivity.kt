@@ -13,7 +13,7 @@ import com.tminus1010.tminustasker.data.SelectedHostPageRepo
 import com.tminus1010.tminustasker.databinding.ActivityMainBinding
 import com.tminus1010.tminustasker.environment.android_wrapper.ActivityWrapper
 import com.tminus1010.tminustasker.environment.android_wrapper.AndroidNavigationWrapperImpl
-import com.tminus1010.tminustasker.ui.Navigator
+import com.tminus1010.tminustasker.ui.all_features.Navigator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
