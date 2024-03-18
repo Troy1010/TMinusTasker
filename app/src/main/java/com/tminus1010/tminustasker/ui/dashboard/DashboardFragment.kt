@@ -34,9 +34,8 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.tminus1010.tmcommonkotlin.androidx.extensions.getColorByAttr
 import com.tminus1010.tminustasker.R
-import com.tminus1010.tminustasker.all_layers.extensions.getColorByAttr
+import com.tminus1010.tminustasker.all_layers.extensions.colorByAttr
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,7 +53,7 @@ class DashboardFragment : Fragment() {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(requireContext().getColorByAttr(R.attr.colorBackgroundWorkaround)) // TODO: Setup Compose+Material theming
+                        .background(colorByAttr(R.attr.colorBackgroundWorkaround)) // TODO: Setup Compose+Material theming
                 ) {
                     ComposableList(state.value)
                 }

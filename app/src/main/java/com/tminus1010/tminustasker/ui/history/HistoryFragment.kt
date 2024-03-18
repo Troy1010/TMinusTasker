@@ -8,15 +8,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tminus1010.tminustasker.R
-import com.tminus1010.tminustasker.all_layers.extensions.getColorByAttr
+import com.tminus1010.tminustasker.all_layers.extensions.colorByAttr
+import com.tminus1010.tminustasker.domain.TaskCompletion
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
 
 
 @AndroidEntryPoint
@@ -30,18 +35,32 @@ class HistoryFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                val state = viewModel.state.collectAsStateWithLifecycle()
+                val state = viewModel.state.collectAsStateWithLifecycle().value
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(requireContext().getColorByAttr(R.attr.colorBackgroundWorkaround)), // TODO: Setup Compose+Material theming
+                        .background(colorByAttr(R.attr.colorBackgroundWorkaround)), // TODO: Setup Compose+Material theming
                 ) {
-                    Column {
-                        state.value.forEach { taskCompletion ->
+                    Column(
+                        modifier = Modifier
+                            .padding(16.dp)
+                    ) {
+                        state.keys.forEach { key ->
                             Text(
-                                text = taskCompletion.message ?: "<No message>",
-                                color = requireContext().getColorByAttr(com.google.android.material.R.attr.colorOnBackground), // TODO: Setup Compose+Material theming
+                                text = "$key${if (key == LocalDate.now()) " (Today)" else ""}",
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier
+                                    .padding(start = 32.dp, bottom = 16.dp),
+                                color = colorByAttr(com.google.android.material.R.attr.colorOnBackground), // TODO: Setup Compose+Material theming
                             )
+                            state[key]?.forEach { taskCompletion: TaskCompletion ->
+                                Text(
+                                    text = "${taskCompletion.categoryName}: ${taskCompletion.message ?: "<No message>"}",
+                                    modifier = Modifier
+                                        .padding(vertical = 4.dp),
+                                    color = colorByAttr(com.google.android.material.R.attr.colorOnBackground), // TODO: Setup Compose+Material theming
+                                )
+                            }
                         }
                     }
                 }

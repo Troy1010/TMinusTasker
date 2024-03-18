@@ -9,6 +9,7 @@ import com.tminus1010.tminustasker.domain.MainInteractor
 import com.tminus1010.tminustasker.environment.android_wrapper.ActivityWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -27,5 +28,9 @@ class HistoryViewModel @Inject constructor(
     // # State
     val state =
         mainInteractor.taskCompletions
-            .stateIn(viewModelScope, SharingStarted.Eagerly, listOf())
+            .map { taskCompletions ->
+                taskCompletions
+                    .groupBy { it.localDate }
+            }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, mapOf())
 }
