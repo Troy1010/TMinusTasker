@@ -2,20 +2,13 @@ package com.tminus1010.tminustasker.domain
 
 import java.time.LocalDate
 
-/**
- * for [dateOfCompletion], null means not completed
- */
 data class CategoryInfo(
     val categoryName: String,
     val completions: List<TaskCompletion>,
+    val currentLocalDate: LocalDate,
 ) {
-    val dateOfCompletion =
-        completions
-            .maxByOrNull { it.localDateTime }
-            ?.localDateTime
-
     val todaysCompletions =
         completions
-            .filter { it.localDateTime.toLocalDate() == LocalDate.now() } // TODO: should be reactive
+            .filter { it.localDateTime.toLocalDate() == currentLocalDate }
     val isCompletedToday get() = todaysCompletions.isNotEmpty()
 }
