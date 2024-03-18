@@ -21,6 +21,7 @@ class MainInteractor @Inject constructor(
     private val categoryRepo: CategoryRepo,
     private val taskCompletionRepo: TaskCompletionRepo,
     private val currentDateRepo: CurrentDateRepo,
+    private val localDateTimeToLocalDateWithAdjustmentConverter: LocalDateTimeToLocalDateWithAdjustmentConverter,
 ) {
     suspend fun createCategory(categoryName: String) {
         categoryRepo.add(categoryName)
@@ -42,7 +43,8 @@ class MainInteractor @Inject constructor(
                         categoryName = category,
                         completions = taskCompletions
                             .filter { it.categoryName == category },
-                        currentLocalDate = currentDate
+                        currentLocalDate = currentDate,
+                        localDateTimeToLocalDateWithAdjustmentConverter = localDateTimeToLocalDateWithAdjustmentConverter
                     )
                 }
             }
