@@ -1,9 +1,9 @@
 package com.tminus1010.tminustasker.domain
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 data class TaskCompletion(
     val categoryName: String,
     val message: String?,
-    val localDate: LocalDate,
+    val localDateTime: LocalDateTime,
 )

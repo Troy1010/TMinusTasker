@@ -12,6 +12,7 @@ object MoshiProvider {
             .add(TripleAdapterFactory)
             .add(BigDecimalAdapter)
             .add(LocalDateAdapter)
+            .add(LocalDateTimeAdapter)
             .addLast(KotlinJsonAdapterFactory())
             .build()
 }

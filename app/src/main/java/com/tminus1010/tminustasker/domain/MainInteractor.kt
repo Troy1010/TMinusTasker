@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -27,7 +28,7 @@ class MainInteractor @Inject constructor(
     }
 
     suspend fun createTaskCompletion(categoryName: String, message: String?) {
-        taskCompletionRepo.add(TaskCompletion(categoryName, message, LocalDate.now()))
+        taskCompletionRepo.add(TaskCompletion(categoryName, message, LocalDateTime.now()))
     }
 
     val categories =

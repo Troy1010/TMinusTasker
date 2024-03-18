@@ -30,7 +30,7 @@ class HistoryViewModel @Inject constructor(
         mainInteractor.taskCompletions
             .map { taskCompletions ->
                 taskCompletions
-                    .groupBy { it.localDate }
+                    .groupBy { it.localDateTime.toLocalDate() }
             }
             .stateIn(viewModelScope, SharingStarted.Eagerly, mapOf())
 }

@@ -11,11 +11,11 @@ data class CategoryInfo(
 ) {
     val dateOfCompletion =
         completions
-            .maxByOrNull { it.localDate }
-            ?.localDate
+            .maxByOrNull { it.localDateTime }
+            ?.localDateTime
 
     val todaysCompletions =
         completions
-            .filter { it.localDate == LocalDate.now() } // TODO: should be reactive
+            .filter { it.localDateTime.toLocalDate() == LocalDate.now() } // TODO: should be reactive
     val isCompletedToday get() = todaysCompletions.isNotEmpty()
 }
