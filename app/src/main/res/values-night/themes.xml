@@ -19,5 +19,6 @@
         <item name="divider">@color/medium_gray</item>
         <!-- TODO: use the Material background instead. I am using this workaround atm because the "normal" solution made animations for button clicks on the bottom nav bar look bad. -->
         <item name="colorBackgroundWorkaround">@color/dark_gray</item>
+        <item name="colorOnBackground">@color/white</item>
     </style>
 </resources>
