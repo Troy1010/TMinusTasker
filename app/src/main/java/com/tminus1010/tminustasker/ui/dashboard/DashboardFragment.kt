@@ -36,6 +36,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tminus1010.tmcommonkotlin.androidx.extensions.getColorByAttr
 import com.tminus1010.tminustasker.R
+import com.tminus1010.tminustasker.all_layers.extensions.getColorByAttr
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,7 +54,7 @@ class DashboardFragment : Fragment() {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color(requireContext().theme.getColorByAttr(R.attr.colorBackgroundWorkaround))) // TODO: Use Material instead. Not using it for background atm because it is messing with bottom nav bar button click animation.
+                        .background(requireContext().getColorByAttr(R.attr.colorBackgroundWorkaround)) // TODO: Use Material instead.
                 ) {
                     ComposableList(state.value)
                 }

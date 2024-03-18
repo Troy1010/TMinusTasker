@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorBackgroundWorkaround"
-    tools:context=".ui.setup.SetupFragment">
+    tools:context=".ui.history.HistoryFragment">
 
     <TextView
         android:id="@+id/text_input_header"
