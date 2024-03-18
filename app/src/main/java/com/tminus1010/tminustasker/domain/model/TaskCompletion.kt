@@ -1,4 +1,4 @@
-package com.tminus1010.tminustasker.domain
+package com.tminus1010.tminustasker.domain.model
 
 import java.time.LocalDateTime
 

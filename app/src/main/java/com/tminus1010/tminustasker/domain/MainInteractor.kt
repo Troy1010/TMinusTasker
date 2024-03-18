@@ -5,6 +5,8 @@ import com.tminus1010.tminustasker.all_layers.extensions.easyShareIn
 import com.tminus1010.tminustasker.data.CategoryRepo
 import com.tminus1010.tminustasker.data.CurrentDateRepo
 import com.tminus1010.tminustasker.data.TaskCompletionRepo
+import com.tminus1010.tminustasker.domain.model.CategoryInfo
+import com.tminus1010.tminustasker.domain.model.TaskCompletion
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine

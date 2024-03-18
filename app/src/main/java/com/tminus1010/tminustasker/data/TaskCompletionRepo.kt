@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.squareup.moshi.JsonAdapter
 import com.tminus1010.tmcommonkotlin.core.tryOrNull
 import com.tminus1010.tminustasker.all_layers.extensions.easyShareIn
-import com.tminus1010.tminustasker.domain.TaskCompletion
+import com.tminus1010.tminustasker.domain.model.TaskCompletion
 import com.tminus1010.tminustasker.environment.adapter.MoshiProvider
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.SharingStarted

@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.tminus1010.tmcommonkotlin.androidx.ShowToast
 import com.tminus1010.tmcommonkotlin.view.NativeText
 import com.tminus1010.tminustasker.R
-import com.tminus1010.tminustasker.domain.CategoryInfo
+import com.tminus1010.tminustasker.domain.model.CategoryInfo
 import com.tminus1010.tminustasker.domain.MainInteractor
 import com.tminus1010.tminustasker.environment.android_wrapper.ActivityWrapper
 import com.tminus1010.tminustasker.ui.all_features.ComposableNativeText

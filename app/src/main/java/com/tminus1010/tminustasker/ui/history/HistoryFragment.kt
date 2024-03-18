@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tminus1010.tminustasker.R
 import com.tminus1010.tminustasker.all_layers.extensions.colorByAttr
-import com.tminus1010.tminustasker.domain.TaskCompletion
+import com.tminus1010.tminustasker.domain.model.TaskCompletion
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 
