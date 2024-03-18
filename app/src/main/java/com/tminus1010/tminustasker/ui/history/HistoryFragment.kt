@@ -21,7 +21,6 @@ import com.tminus1010.tminustasker.R
 import com.tminus1010.tminustasker.all_layers.extensions.colorByAttr
 import com.tminus1010.tminustasker.domain.model.TaskCompletion
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDate
 
 
 @AndroidEntryPoint
@@ -47,7 +46,7 @@ class HistoryFragment : Fragment() {
                     ) {
                         state.keys.forEach { key ->
                             Text(
-                                text = "$key${if (key == LocalDate.now()) " (Today)" else ""}",
+                                text = key,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier
                                     .padding(start = 32.dp, bottom = 16.dp),
