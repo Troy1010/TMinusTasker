@@ -9,9 +9,11 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -61,7 +63,7 @@ class DashboardFragment : Fragment() {
 }
 
 @Composable
-fun ComposableList(items: List<CategoryViewModelItem>) {
+fun ComposableList(categoryViewModelItems: List<CategoryViewModelItem>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -69,7 +71,7 @@ fun ComposableList(items: List<CategoryViewModelItem>) {
             .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.Center,
     ) {
-        items.forEach { item ->
+        categoryViewModelItems.forEach { categoryViewModelItem ->
             var expanded by remember { mutableStateOf(false) }
             Card(
                 modifier = Modifier
@@ -78,29 +80,42 @@ fun ComposableList(items: List<CategoryViewModelItem>) {
                     .pointerInput(Unit) {
                         detectTapGestures(
                             onLongPress = { expanded = true },
-                            onTap = { item.onClick() },
+                            onTap = { categoryViewModelItem.onClick() },
                         )
                     },
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(item.backgroundColor)
+                    containerColor = Color(categoryViewModelItem.backgroundColor)
                 ),
             ) {
-                Text(
-                    text = item.categoryName,
-                    color = Color(item.textColor),
-                    modifier = Modifier.padding(16.dp),
-                    fontSize = 16.sp,
-                )
+                Column {
+                    Text(
+                        text = categoryViewModelItem.categoryName,
+                        color = Color(categoryViewModelItem.textColor),
+                        modifier = Modifier.padding(16.dp),
+                        fontSize = 16.sp,
+                    )
+                    categoryViewModelItem.todaysCompletionMessages.forEach { taskCompletionMessage ->
+                        Text(
+                            text = taskCompletionMessage ?: "<No message>",
+                            color = Color(categoryViewModelItem.textColor),
+                            modifier = Modifier.padding(horizontal = 32.dp),
+                            fontSize = 14.sp,
+                        )
+                    }
+                }
                 DropdownMenu(
                     expanded = expanded,
                     onDismissRequest = { expanded = false },
                 ) {
-                    item.menuVMItems.forEach { menuVMItem ->
+                    categoryViewModelItem.menuVMItems.forEach { menuVMItem ->
                         DropdownMenuItem(
                             text = { Text(menuVMItem.text.stringResource()) },
                             onClick = { menuVMItem.onClick(); expanded = false },
                         )
                     }
+                }
+                if (categoryViewModelItem.todaysCompletionMessages.isNotEmpty()) {
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
         }

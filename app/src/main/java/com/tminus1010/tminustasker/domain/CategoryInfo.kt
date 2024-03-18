@@ -7,7 +7,15 @@ import java.time.LocalDate
  */
 data class CategoryInfo(
     val categoryName: String,
-    val dateOfCompletion: LocalDate?
+    val completions: List<TaskCompletion>,
 ) {
-    val isCompletedToday get() = LocalDate.now() == dateOfCompletion // TODO: should be reactive
+    val dateOfCompletion =
+        completions
+            .maxByOrNull { it.localDate }
+            ?.localDate
+
+    val todaysCompletions =
+        completions
+            .filter { it.localDate == LocalDate.now() } // TODO: should be reactive
+    val isCompletedToday get() = todaysCompletions.isNotEmpty()
 }

@@ -25,9 +25,7 @@ class MainInteractor @Inject constructor(
                     CategoryInfo(
                         category,
                         taskCompletions
-                            .filter { it.categoryName == category }
-                            .maxByOrNull { it.localDate }
-                            ?.localDate
+                            .filter { it.categoryName == category },
                     )
                 }
             }

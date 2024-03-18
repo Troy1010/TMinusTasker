@@ -8,5 +8,6 @@ data class CategoryViewModelItem(
     val backgroundColor: Int,
     val textColor: Int,
     val menuVMItems: List<MenuVMItem>,
+    val todaysCompletionMessages: List<String?>,
     val onClick: () -> Unit,
 )

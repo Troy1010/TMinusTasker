@@ -67,6 +67,7 @@ class DashboardViewModel @Inject constructor(
                                 onClick = { userRemoveCategory(it) }
                             )
                         ),
+                        todaysCompletionMessages = it.todaysCompletions.map { it.message },
                         onClick = { userSelectCategory(it) }
                     )
                 }
