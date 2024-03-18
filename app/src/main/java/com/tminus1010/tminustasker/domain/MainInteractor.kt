@@ -18,6 +18,18 @@ class MainInteractor @Inject constructor(
     private val categoryRepo: CategoryRepo,
     private val taskCompletionRepo: TaskCompletionRepo,
 ) {
+    suspend fun createCategory(categoryName: String) {
+        categoryRepo.add(categoryName)
+    }
+
+    suspend fun removeCategory(categoryName: String) {
+        categoryRepo.remove(categoryName)
+    }
+
+    suspend fun createTaskCompletion(categoryName: String, message: String?) {
+        taskCompletionRepo.add(TaskCompletion(categoryName, message, LocalDate.now()))
+    }
+
     val categories =
         combine(categoryRepo.flow, taskCompletionRepo.flow, ::tuple)
             .map { (categories, taskCompletions) ->
@@ -31,15 +43,6 @@ class MainInteractor @Inject constructor(
             }
             .easyShareIn(GlobalScope, SharingStarted.Eagerly, listOf())
 
-    suspend fun createCategory(categoryName: String) {
-        categoryRepo.add(categoryName)
-    }
-
-    suspend fun removeCategory(categoryName: String) {
-        categoryRepo.remove(categoryName)
-    }
-
-    suspend fun createTaskCompletion(categoryName: String, message: String?) {
-        taskCompletionRepo.add(TaskCompletion(categoryName, message, LocalDate.now()))
-    }
+    val taskCompletions =
+        taskCompletionRepo.flow
 }

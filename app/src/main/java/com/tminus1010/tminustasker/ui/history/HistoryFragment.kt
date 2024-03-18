@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tminus1010.tminustasker.R
 import com.tminus1010.tminustasker.all_layers.extensions.getColorByAttr
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,18 +30,20 @@ class HistoryFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-//                val state = viewModel.state.collectAsStateWithLifecycle()
+                val state = viewModel.state.collectAsStateWithLifecycle()
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(requireContext().getColorByAttr(R.attr.colorBackgroundWorkaround)) // TODO: Use Material instead.,
+                        .background(requireContext().getColorByAttr(R.attr.colorBackgroundWorkaround)), // TODO: Setup Compose+Material theming
                 ) {
-                    Text(
-                        text = "History Fragment",
-                        modifier = Modifier
-                            .align(Alignment.Center),
-                        color = requireContext().getColorByAttr(com.google.android.material.R.attr.colorOnBackground), // TODO: Use Material instead.
-                    )
+                    Column {
+                        state.value.forEach { taskCompletion ->
+                            Text(
+                                text = taskCompletion.message ?: "<No message>",
+                                color = requireContext().getColorByAttr(com.google.android.material.R.attr.colorOnBackground), // TODO: Setup Compose+Material theming
+                            )
+                        }
+                    }
                 }
             }
         }

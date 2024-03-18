@@ -54,7 +54,7 @@ class DashboardFragment : Fragment() {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(requireContext().getColorByAttr(R.attr.colorBackgroundWorkaround)) // TODO: Use Material instead.
+                        .background(requireContext().getColorByAttr(R.attr.colorBackgroundWorkaround)) // TODO: Setup Compose+Material theming
                 ) {
                     ComposableList(state.value)
                 }
