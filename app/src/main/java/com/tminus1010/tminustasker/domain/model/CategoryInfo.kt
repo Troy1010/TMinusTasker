@@ -11,6 +11,6 @@ data class CategoryInfo(
 ) {
     val todaysCompletions =
         completions
-            .filter { localDateTimeToLocalDateWithAdjustmentConverter.convert(it.localDateTime) == currentLocalDate }
+            .filter { localDateTimeToLocalDateWithAdjustmentConverter.reverse(it.localDateTime) == currentLocalDate }
     val isCompletedToday get() = todaysCompletions.isNotEmpty()
 }

@@ -10,4 +10,8 @@ class LocalDateTimeToLocalDateWithAdjustmentConverter @Inject constructor() {
     fun convert(localDateTime: LocalDateTime): LocalDate {
         return localDateTime.minusHours(hoursAfterMidnightCounted).toLocalDate()
     }
+
+    fun reverse(localDateTime: LocalDateTime): LocalDate {
+        return localDateTime.plusHours(hoursAfterMidnightCounted).toLocalDate()
+    }
 }
