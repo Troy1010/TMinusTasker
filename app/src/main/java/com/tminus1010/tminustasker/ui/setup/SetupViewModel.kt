@@ -5,9 +5,11 @@ import com.tminus1010.tmcommonkotlin.androidx.ShowToast
 import com.tminus1010.tminustasker.data.CategoryRepo
 import com.tminus1010.tminustasker.data.TaskCompletionRepo
 import com.tminus1010.tminustasker.domain.MainInteractor
+import com.tminus1010.tminustasker.domain.TaskCompletionInteractor
 import com.tminus1010.tminustasker.environment.android_wrapper.ActivityWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,6 +18,7 @@ class SetupViewModel @Inject constructor(
     private val activityWrapper: ActivityWrapper,
     private val showToast: ShowToast,
     private val taskCompletionRepo: TaskCompletionRepo,
+    private val taskCompletionInteractor: TaskCompletionInteractor,
     private val categoryRepo: CategoryRepo,
 ) : ViewModel() {
     // # User Intents
@@ -38,6 +41,11 @@ class SetupViewModel @Inject constructor(
     suspend fun userClearCategories() {
         activityWrapper.showAlertDialog.invoke("Clearing categories")
         categoryRepo.setDefault()
+    }
+
+    suspend fun userClearTaskCompletionsToday() {
+        activityWrapper.showAlertDialog.invoke("Clearing task completions for today")
+        taskCompletionInteractor.removeEntriesForDay(LocalDate.now())
     }
 
     // # State

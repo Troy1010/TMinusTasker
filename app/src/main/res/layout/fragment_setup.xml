@@ -43,6 +43,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Clear Task Completions"
+        app:layout_constraintBottom_toTopOf="@id/button_clear_task_completions_for_today" />
+
+    <Button
+        android:id="@+id/button_clear_task_completions_for_today"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear Task Completions For Today"
         app:layout_constraintBottom_toTopOf="@id/button_playground" />
 
     <Button

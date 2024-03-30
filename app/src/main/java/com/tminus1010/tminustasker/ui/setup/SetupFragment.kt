@@ -48,6 +48,7 @@ class SetupFragment : Fragment() {
         binding.buttonPlayground.setOnClickListener { lifecycleScope.launch { viewModel.userPlayground() } }
         binding.buttonClearCategories.setOnClickListener { lifecycleScope.launch { viewModel.userClearCategories() } }
         binding.buttonClearTaskCompletions.setOnClickListener { lifecycleScope.launch { viewModel.userClearTaskCompletions() } }
+        binding.buttonClearTaskCompletionsForToday.setOnClickListener { lifecycleScope.launch { viewModel.userClearTaskCompletionsToday() } }
     }
 
     override fun onDestroyView() {
