@@ -20,6 +20,7 @@ class HistoryViewModel @Inject constructor(
         mainInteractor.taskCompletions
             .map { taskCompletions ->
                 taskCompletions
+                    .sortedByDescending { localDateTimeToLocalDateWithAdjustmentConverter.convert(it.localDateTime) }
                     .groupBy { localDateTimeToLocalDateWithAdjustmentConverter.convert(it.localDateTime) }
                     .mapKeys { (key, value) -> "$key${if (key == localDateTimeToLocalDateWithAdjustmentConverter.convert(LocalDateTime.now())) " (Today)" else ""}" } // TODO: Make Reactive
             }
